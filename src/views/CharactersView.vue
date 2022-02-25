@@ -1,14 +1,11 @@
 <template>
   <section id="characters">
             <div id="character-cards" v-if="charactersData">
-                
-                <div v-for="singleCharData in characterPool" class="char-card" :key="singleCharData.id">
-                    <img :src="singleCharData.image" alt="" class="char-img" :style="setImgGenderColor(singleCharData.gender)"/>
-                    <h2 class="char-name">{{ singleCharData.name }}</h2>
-                    <p class="char-id">{{ singleCharData.id }}</p>
+                <div v-for="singleChar in characterPool" class="char-card" :key="singleChar.id">
+                    <img :src="singleChar.image" alt="" class="char-img" :style="setImgGenderColor(singleChar.gender)"/>
+                    <h2 class="char-name">{{ singleChar.name }}</h2>
+                    <p class="char-id">{{ singleChar.id }}</p>
                 </div>
-            
-
             </div>
             <!-- { loading && hasMore && <MainLoading/>} -->
         </section>

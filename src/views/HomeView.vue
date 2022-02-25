@@ -1,16 +1,16 @@
 <template>
   <section id="home">
             <div className="home-cards-container">
-                <router-link to="characters">
+                <router-link :to="{ name: 'characters' }">
                     <div className="home-cards" id="char-home-card"></div>
                     <h2 className="home-card-text">Characters</h2>
                 </router-link>
             </div>
             <div className="home-cards-container">
-                <!-- <Link to='/locations'> -->
+                <router-link :to="{ name: 'locations' }">
                     <div className="home-cards" id="location-home-card"></div>
                     <h2 className="home-card-text">Locations</h2>
-                <!-- </Link> -->
+                </router-link>
             </div>
             <div className="home-cards-container">
                 <!-- <Link to='/episodes'> -->

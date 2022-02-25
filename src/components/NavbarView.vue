@@ -14,10 +14,10 @@
                 <router-link :to="{ name: 'characters' }">
                     <p id="nav-link-character">Characters</p>
                 </router-link>
-                <!-- <Link to='/locations'> -->
+                <router-link :to="{ name: 'locations' }">
                     <p id="nav-link-location">Locations</p>
-                <!-- </Link>
-                <Link to='/episodes'> -->
+                </router-link>
+                <!-- <Link to='/episodes'> -->
                     <p id="nav-link-episode">Episodes</p>
                 <!-- </Link> -->
             </div>
