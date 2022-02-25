@@ -17,9 +17,9 @@
                 <router-link :to="{ name: 'locations' }">
                     <p id="nav-link-location">Locations</p>
                 </router-link>
-                <!-- <Link to='/episodes'> -->
+                <router-link :to="{ name: 'episodes' }">
                     <p id="nav-link-episode">Episodes</p>
-                <!-- </Link> -->
+                </router-link>
             </div>
         </nav>
 </template>

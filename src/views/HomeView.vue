@@ -13,10 +13,10 @@
                 </router-link>
             </div>
             <div className="home-cards-container">
-                <!-- <Link to='/episodes'> -->
+                <router-link :to="{ name: 'episodes' }">
                     <div className="home-cards" id="episode-home-card"></div>
                     <h2 className="home-card-text">Episodes</h2>
-                <!-- </Link> -->
+                </router-link>
             </div>
         </section>
 </template>
