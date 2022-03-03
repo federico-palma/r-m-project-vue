@@ -1,14 +1,16 @@
 <template>
   <section id="characters">
-            <div id="character-cards" v-if="charactersData">
-                <div v-for="singleChar in characterPool" class="char-card" :key="singleChar.id">
-                    <img :src="singleChar.image" alt="" class="char-img" :style="setImgGenderColor(singleChar.gender)"/>
-                    <h2 class="char-name">{{ singleChar.name }}</h2>
-                    <p class="char-id">{{ singleChar.id }}</p>
-                </div>
-            </div>
-            <!-- { loading && hasMore && <MainLoading/>} -->
-        </section>
+        <div id="character-cards" v-if="charactersData">
+            
+            <router-link tag="div" v-for="singleChar in characterPool" class="char-card" :key="singleChar.id" :to="{ name: 'character-details', params: {id: singleChar.id} }">
+                <img :src="singleChar.image" alt="" class="char-img" :style="setImgGenderColor(singleChar.gender)"/>
+                <h2 class="char-name">{{ singleChar.name }}</h2>
+                <p class="char-id">{{ singleChar.id }}</p>
+            </router-link>
+            
+        </div>
+        <!-- { loading && hasMore && <MainLoading/>} -->
+    </section>
 </template>
 
 <script>
@@ -86,6 +88,7 @@ export default {
 }
 
 .char-card{
+    color: black;
     position: relative;
     max-width: 216px;
     height: 300px;
@@ -109,9 +112,9 @@ export default {
     }
 }
 
-/* .char-card:hover {
+.char-card:hover {
     cursor: pointer;
-} */
+}
 
 .char-img {
     max-width: 80%;

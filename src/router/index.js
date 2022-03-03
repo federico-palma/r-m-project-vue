@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import CharactersView from '../views/CharactersView.vue'
 import LocationsView from '../views/LocationsView.vue'
 import EpisodesView from '../views/EpisodesView.vue'
+import CharacterDetailsView from '../views/CharacterDetailsView.vue'
 
 const routes = [
   {
@@ -14,6 +15,12 @@ const routes = [
     path: '/characters',
     name: 'characters',
     component: CharactersView
+  },
+  {
+    path: '/characters/:id',
+    name: 'character-details',
+    component: CharacterDetailsView,
+    props: true
   },
   {
     path: '/locations',
