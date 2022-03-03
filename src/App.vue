@@ -9,7 +9,10 @@
 import NavbarView from './components/NavbarView.vue'
 
 export default {
-  components: { NavbarView }
+  components: { NavbarView },
+  created () {
+            document.title = "R&M Vue Project";
+  }
 }
 </script>
 

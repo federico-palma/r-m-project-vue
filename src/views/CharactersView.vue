@@ -57,6 +57,9 @@ export default {
             }
         }
     },
+    created () {
+            document.title = "Characters | R&M Vue Project";
+    },
     beforeMount() {
         this.fetchData('https://rickandmortyapi.com/api/character')
     },

@@ -25,7 +25,14 @@
 
 export default {
   name: 'HomeView',
-  components: {}
+  components: {},
+  metaInfo: {
+    title: 'Home',
+    titleTemplate: null
+  },
+  created () {
+            document.title = "Home | R&M Vue Project";
+        }
 }
 </script>
 

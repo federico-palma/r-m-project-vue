@@ -6,7 +6,7 @@
                     <h2 class="episode-name">{{ singleEpisode.name }}</h2>
                     <p class="episode-number">Season: {{ singleEpisode.episode.slice(1, 3) }} | Episode: {{ singleEpisode.episode.slice(4) }}</p>
                     <p class="episode-date">{{ singleEpisode.air_date }}</p>
-                    <button className="episode-char-btn">Characters</button>
+                    <!-- <button className="episode-char-btn">Characters</button> -->
                 </div>
             </div>
 
@@ -69,6 +69,9 @@ export default {
                     break;
             }
         }   
+    },
+    created () {
+            document.title = "Episodes | R&M Vue Project";
     },
     beforeMount() {
         this.fetchData('https://rickandmortyapi.com/api/episode')

@@ -8,7 +8,7 @@
                 <p class="location-type">Type: {{ singleLocation.type }}</p>
                 <p class="location-dimension">Dimension: {{ singleLocation.dimension }}</p>
                 </div>
-                <button class="residents-btn">Residents</button>
+                <!-- <button class="residents-btn">Residents</button> -->
             </div>
         </div>
             <!-- { loading && hasMore && <MainLoading/> } -->
@@ -42,6 +42,9 @@ export default {
                 }
             }
         }   
+    },
+    created () {
+            document.title = "Locations | R&M Vue Project";
     },
     beforeMount() {
         this.fetchData('https://rickandmortyapi.com/api/location')
