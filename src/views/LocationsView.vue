@@ -8,7 +8,8 @@
                 <p class="location-type">Type: {{ singleLocation.type }}</p>
                 <p class="location-dimension">Dimension: {{ singleLocation.dimension }}</p>
                 </div>
-                <!-- <button class="residents-btn">Residents</button> -->
+                <router-link tag="button" class="residents-btn" :to="{ name: 'location-details', params: {id: singleLocation.id} }">Residents</router-link>
+                <!-- <button class="residents-btn"></button> -->
             </div>
         </div>
             <!-- { loading && hasMore && <MainLoading/> } -->
@@ -123,6 +124,7 @@ export default {
     border-radius: 8px;
     font-size: 1.3rem;
     font-family: 'Righteous', cursive;
+    text-align: center;
 }
 
 .residents-btn:hover {
