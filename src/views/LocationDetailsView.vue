@@ -4,9 +4,11 @@
         <h1 id="location-name">{{ locationData.name }}</h1>
         <h2>Type: {{ locationData.type }}</h2>
         <h2>Residents</h2>
-        <ul id="residents-list" :v-if="residentsPool">
-            <li :v-for="resident in residentsPool"> {{ resident.name }} </li>
-
+        <ul id="residents-list" v-if="residentsPool">
+            <li class="resident-item" v-for="resident in residentsPool" :key="resident.id"> 
+                <img :src="resident.image" alt="">
+                <p>{{ resident.name }} </p>
+            </li>
         </ul>
       </div>
   </section>
@@ -41,8 +43,7 @@ export default {
             fetch(url)
                 .then(res => res.json())
                 .then(data => {
-                    this.residentsPool = data
-                    console.log(this.residentsPool)
+                    this.residentsPool = [...data]
                     })
                 .catch(err => console.log(err.message))
         },
@@ -94,4 +95,24 @@ export default {
     font-size: 1.5rem;
     padding: 0px;
 }
+
+.resident-item {
+    display: flex;
+    align-content: center;
+    border: 3px solid darkcyan;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin: 5px;
+}
+
+.resident-item img {
+    border-radius: 50%;
+    width: 15%;
+    height: 15%;
+    justify-self: left;
+}
+
+/* .resident-item p {
+    
+} */
 </style>
