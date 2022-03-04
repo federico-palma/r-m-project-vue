@@ -36,5 +36,6 @@ section {
     width: 80%;
     background-color: #7da3a8ca;
     margin: auto;
+    min-height: 100vh;
     height: 100%;
 }
