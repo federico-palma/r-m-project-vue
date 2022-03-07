@@ -35,14 +35,14 @@ export default {
                 .catch(err => console.log(err.message))    
         },
         getNextPage() {
-            window.onscroll = () => {
-                let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
-                if (bottomOfWindow) {
-                    this.fetchData(this.locationsData.info.next)
-                    console.log(this.locationsData.info.next)
-                }
+            let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
+                // console.log(document.documentElement.offsetHeight, document.documentElement.scrollTop + window.innerHeight)
+            if (bottomOfWindow) {
+                this.fetchData(this.locationsData.info.next)
+                console.log(this.locationsData.info.next)
+                
             }
-        }   
+        },
     },
     created () {
             document.title = "Locations | R&M Vue Project";
@@ -51,7 +51,10 @@ export default {
         this.fetchData('https://rickandmortyapi.com/api/location')
     },
     mounted() {
-        this.getNextPage()
+        window.addEventListener('scroll', this.getNextPage)
+    },
+    beforeUnmount() {
+        window.removeEventListener('scroll', this.getNextPage)
     }
 }
 </script>
