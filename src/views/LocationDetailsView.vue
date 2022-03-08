@@ -94,7 +94,7 @@ export default {
 .resident-item {
     display: flex;
     align-content: center;
-    border: 3px solid darkcyan;
+    background-color: rgb(90, 168, 168);
     border-radius: 5px;
     padding: 5px 10px;
     margin: 5px;
