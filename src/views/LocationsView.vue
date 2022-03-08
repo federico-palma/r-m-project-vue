@@ -35,7 +35,7 @@ export default {
         },
         getNextPage() {
             let bottomOfWindow = Math.round(document.documentElement.scrollTop) + window.innerHeight === document.documentElement.offsetHeight;
-            if (bottomOfWindow) {
+            if (bottomOfWindow && this.locationsData.info.next != null) {
                 this.fetchData(this.locationsData.info.next)                
             }
         },

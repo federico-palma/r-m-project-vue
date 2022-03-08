@@ -51,11 +51,9 @@ export default {
                 .catch(err => console.log(err.message))    
         },
         getNextPage() {
-            window.onscroll = () => {
-                let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
-                if (bottomOfWindow) {
-                    this.fetchData(this.charactersData.info.next)
-                }
+            let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
+            if (bottomOfWindow && this.charactersData.info.next != null) {
+                this.fetchData(this.charactersData.info.next)
             }
         }
     },
@@ -65,8 +63,11 @@ export default {
     beforeMount() {
         this.fetchData('https://rickandmortyapi.com/api/character')
     },
-    mounted() {
-        this.getNextPage()
+    updated() {
+        window.addEventListener('scroll', this.getNextPage)
+    },
+    beforeUnmount() {
+        window.removeEventListener('scroll', this.getNextPage)
     }
 }
 </script>
@@ -98,6 +99,10 @@ export default {
     background-color: #BEE5fD;
     display: grid;
     grid-row: 70% 20%;
+}
+
+.char-card:hover {
+    background-color: #a8cbe0;
 }
 
 @media only screen and (max-width: 670px) {

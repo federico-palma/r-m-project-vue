@@ -6,7 +6,7 @@
                     <h2 class="episode-name">{{ singleEpisode.name }}</h2>
                     <p class="episode-number">Season: {{ singleEpisode.episode.slice(1, 3) }} | Episode: {{ singleEpisode.episode.slice(4) }}</p>
                     <p class="episode-date">{{ singleEpisode.air_date }}</p>
-                    <!-- <button className="episode-char-btn">Characters</button> -->
+                    <router-link tag="button" className="characters-btn" :to="{ name:'episode-details', params: {id: singleEpisode.id} }">Characters</router-link>
                 </div>
             </div>
 
@@ -33,12 +33,9 @@ export default {
                 .catch(err => console.log(err.message))    
         },
         getNextPage() {
-            window.onscroll = () => {
-                let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
-                if (bottomOfWindow) {
-                    this.fetchData(this.episodesData.info.next)
-                    console.log(this.episodesData.info.next)
-                }
+            let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
+            if (bottomOfWindow && this.episodesData.info.next != null) {
+                this.fetchData(this.episodesData.info.next)
             }
         },
         setBackgroundColor(season) {
@@ -76,8 +73,11 @@ export default {
     beforeMount() {
         this.fetchData('https://rickandmortyapi.com/api/episode')
     },
-    mounted() {
-        this.getNextPage()
+    updated() {
+        window.addEventListener('scroll', this.getNextPage)
+    },
+    beforeUnmount() {
+        window.removeEventListener('scroll', this.getNextPage)
     }
 }
 </script>
@@ -138,14 +138,16 @@ export default {
     font-size: 1.4rem;
 }
 
-.episode-char-btn {
+.characters-btn {
     margin: auto;
-    width: 70%;
+    width: 50%;
+    min-width: fit-content;
     background-color: rgba(0, 0, 0, 0);
     border: 3px solid black;
     border-radius: 8px;
     font-size: 1.3rem;
     font-family: 'Righteous', cursive;
+    text-align: center;
 }
 
 .episode-char-btn:hover {
