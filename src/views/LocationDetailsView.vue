@@ -6,10 +6,10 @@
         <h2 v-if="residentsPool.length > 0">Residents</h2>
         <h2 v-else>No residents in this location</h2>
         <ul id="residents-list" v-if="residentsPool">
-            <li class="resident-item" v-for="resident in residentsPool" :key="resident.id"> 
+            <router-link tag="li" class="resident-item" v-for="resident in residentsPool" :key="resident.id" :to="{ name: 'character-details', params: {id: resident.id} }"> 
                 <img :src="resident.image" alt="">
                 <p>{{ resident.name }} </p>
-            </li>
+            </router-link>
         </ul>
       </div>
   </section>
