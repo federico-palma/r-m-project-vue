@@ -9,7 +9,6 @@
                 <p class="location-dimension">Dimension: {{ singleLocation.dimension }}</p>
                 </div>
                 <router-link tag="button" class="residents-btn" :to="{ name: 'location-details', params: {id: singleLocation.id} }">Residents</router-link>
-                <!-- <button class="residents-btn"></button> -->
             </div>
         </div>
             <!-- { loading && hasMore && <MainLoading/> } -->
