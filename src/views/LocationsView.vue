@@ -8,7 +8,7 @@
                 <p class="location-type">Type: {{ singleLocation.type }}</p>
                 <p class="location-dimension">Dimension: {{ singleLocation.dimension }}</p>
                 </div>
-                <!-- <button class="residents-btn">Residents</button> -->
+                <router-link tag="button" class="residents-btn" :to="{ name: 'location-details', params: {id: singleLocation.id} }">Residents</router-link>
             </div>
         </div>
             <!-- { loading && hasMore && <MainLoading/> } -->
@@ -34,23 +34,23 @@ export default {
                 .catch(err => console.log(err.message))    
         },
         getNextPage() {
-            window.onscroll = () => {
-                let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
-                if (bottomOfWindow) {
-                    this.fetchData(this.locationsData.info.next)
-                    console.log(this.locationsData.info.next)
-                }
+            let bottomOfWindow = Math.round(document.documentElement.scrollTop) + window.innerHeight === document.documentElement.offsetHeight;
+            if (bottomOfWindow) {
+                this.fetchData(this.locationsData.info.next)                
             }
-        }   
+        },
     },
     created () {
-            document.title = "Locations | R&M Vue Project";
+        document.title = "Locations | R&M Vue Project";
     },
     beforeMount() {
         this.fetchData('https://rickandmortyapi.com/api/location')
     },
-    mounted() {
-        this.getNextPage()
+    updated() {
+        window.addEventListener('scroll', this.getNextPage)
+    },
+    beforeUnmount() {
+        window.removeEventListener('scroll', this.getNextPage)
     }
 }
 </script>
@@ -123,6 +123,7 @@ export default {
     border-radius: 8px;
     font-size: 1.3rem;
     font-family: 'Righteous', cursive;
+    text-align: center;
 }
 
 .residents-btn:hover {
