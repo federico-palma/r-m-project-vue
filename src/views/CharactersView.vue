@@ -101,6 +101,10 @@ export default {
     grid-row: 70% 20%;
 }
 
+.char-card:hover {
+    background-color: #a8cbe0;
+}
+
 @media only screen and (max-width: 670px) {
     .char-card {
         margin: 5px;
