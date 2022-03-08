@@ -53,7 +53,7 @@ export default {
         getNextPage() {
             window.onscroll = () => {
                 let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
-                if (bottomOfWindow) {
+                if (bottomOfWindow && this.charactersData.info.next != null) {
                     this.fetchData(this.charactersData.info.next)
                 }
             }
