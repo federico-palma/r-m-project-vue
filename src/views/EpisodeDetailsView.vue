@@ -106,6 +106,10 @@ export default {
     margin: 5px;
 }
 
+.character-item:hover {
+    background-color: rgb(102, 190, 190);
+}
+
 .character-item img {
     border-radius: 50%;
     max-width: 77px;

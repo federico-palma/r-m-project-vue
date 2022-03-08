@@ -100,6 +100,10 @@ export default {
     margin: 5px;
 }
 
+.resident-item:hover {
+    background-color: rgb(102, 190, 190);
+}
+
 .resident-item img {
     border-radius: 50%;
     max-width: 77px;
