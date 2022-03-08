@@ -6,7 +6,7 @@
                     <h2 class="episode-name">{{ singleEpisode.name }}</h2>
                     <p class="episode-number">Season: {{ singleEpisode.episode.slice(1, 3) }} | Episode: {{ singleEpisode.episode.slice(4) }}</p>
                     <p class="episode-date">{{ singleEpisode.air_date }}</p>
-                    <router-link tag="button" className="episode-char-btn" :to="{ name:'episode-details', params: {id: singleEpisode.id} }">Characters</router-link>
+                    <router-link tag="button" className="characters-btn" :to="{ name:'episode-details', params: {id: singleEpisode.id} }">Characters</router-link>
                 </div>
             </div>
 
@@ -138,7 +138,7 @@ export default {
     font-size: 1.4rem;
 }
 
-.episode-char-btn {
+.characters-btn {
     margin: auto;
     width: 50%;
     min-width: fit-content;
