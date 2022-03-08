@@ -2,7 +2,8 @@
   <section id="episode-details">
       <div id="episode-details-container" v-if="episodeData">
         <h1 id="episode-name">{{ episodeData.name }}</h1>
-        <h2>Type: {{ episodeData.type }}</h2>
+        <p class="episode-info">Season: {{ episodeData.episode.slice(1, 3) }} | Episode: {{ episodeData.episode.slice(4) }}</p>
+        <p class="episode-info">Air date: {{ episodeData.air_date }}</p>
         <h2 v-if="residentsPool.length > 0">Characters</h2>
         <h2 v-else>No characters in this episode</h2>
         <ul id="residents-list" v-if="residentsPool">
@@ -83,6 +84,11 @@ export default {
 #episode-name {
     font-size: 2.3rem;
     text-align: center;
+}
+
+.episode-info {
+    margin: 10px auto;
+    font-size: 1.4rem;
 }
 
 #residents-list {
