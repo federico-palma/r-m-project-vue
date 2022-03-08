@@ -41,12 +41,12 @@ export default {
         },
     },
     created () {
-            document.title = "Locations | R&M Vue Project";
+        document.title = "Locations | R&M Vue Project";
     },
     beforeMount() {
         this.fetchData('https://rickandmortyapi.com/api/location')
     },
-    mounted() {
+    updated() {
         window.addEventListener('scroll', this.getNextPage)
     },
     beforeUnmount() {
