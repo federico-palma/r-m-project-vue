@@ -3,7 +3,8 @@
       <div id="location-details-container" v-if="locationData">
         <h1 id="location-name">{{ locationData.name }}</h1>
         <h2>Type: {{ locationData.type }}</h2>
-        <h2>Residents</h2>
+        <h2 v-if="residentsPool.length > 0">Residents</h2>
+        <h2 v-else>No residents in this location</h2>
         <ul id="residents-list" v-if="residentsPool">
             <li class="resident-item" v-for="resident in residentsPool" :key="resident.id"> 
                 <img :src="resident.image" alt="">
@@ -35,7 +36,9 @@ export default {
                     })
                 })
                 .then(() => {
-                    this.fetchResidents('https://rickandmortyapi.com/api/character/' + this.residentsIDs)
+                    if (this.residentsIDs.length > 0) {
+                        this.fetchResidents('https://rickandmortyapi.com/api/character/' + this.residentsIDs)
+                    }
                 })
                 .catch(err => console.log(err.message))    
         },
@@ -43,18 +46,10 @@ export default {
             fetch(url)
                 .then(res => res.json())
                 .then(data => {
-                    this.residentsPool = [...data]
+                    this.residentsPool = Array.isArray(data) ? [...data] : [data]
                     })
                 .catch(err => console.log(err.message))
         },
-        // getNextPage() {
-        //     window.onscroll = () => {
-        //         let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
-        //         if (bottomOfWindow) {
-        //             // this.fetchData(this.charactersData.info.next)
-        //         }
-        //     }
-        // }
     },
     beforeMount() {
         this.fetchData('https://rickandmortyapi.com/api/location/' + this.id)
@@ -107,12 +102,14 @@ export default {
 
 .resident-item img {
     border-radius: 50%;
-    width: 15%;
+    max-width: 77px;
     height: 15%;
     justify-self: left;
 }
 
-/* .resident-item p {
-    
-} */
+.resident-item p {
+    text-align: center;
+    margin: auto;
+    padding: 0px 5px;
+}
 </style>
