@@ -4,12 +4,12 @@
         <h1 id="episode-name">{{ episodeData.name }}</h1>
         <p class="episode-info">Season: {{ episodeData.episode.slice(1, 3) }} | Episode: {{ episodeData.episode.slice(4) }}</p>
         <p class="episode-info">Air date: {{ episodeData.air_date }}</p>
-        <h2 v-if="residentsPool.length > 0">Characters</h2>
+        <h2 v-if="charactersPool.length > 0">Characters</h2>
         <h2 v-else>No characters in this episode</h2>
-        <ul id="residents-list" v-if="residentsPool">
-            <router-link tag="li" class="resident-item" v-for="resident in residentsPool" :key="resident.id" :to="{ name: 'character-details', params: {id: resident.id} }"> 
-                <img :src="resident.image" alt="">
-                <p>{{ resident.name }} </p>
+        <ul id="characters-list" v-if="charactersPool">
+            <router-link tag="li" class="character-item" v-for="character in charactersPool" :key="character.id" :to="{ name: 'character-details', params: {id: character.id} }"> 
+                <img :src="character.image" alt="">
+                <p>{{ character.name }} </p>
             </router-link>
         </ul>
       </div>
@@ -22,8 +22,8 @@ export default {
     data() {
         return {
             episodeData: null,
-            residentsIDs: [],
-            residentsPool: []
+            charactersIDs: [],
+            charactersPool: []
         }
     },
     methods: {
@@ -32,22 +32,22 @@ export default {
                 .then(res => res.json())
                 .then(data => {
                     this.episodeData = data
-                    this.residentsIDs = data.characters.map((residentUrl) => {
-                        return residentUrl.replace(/\D/g, "")
+                    this.charactersIDs = data.characters.map((characterUrl) => {
+                        return characterUrl.replace(/\D/g, "")
                     })
                 })
                 .then(() => {
-                    if (this.residentsIDs.length > 0) {
-                        this.fetchResidents('https://rickandmortyapi.com/api/character/' + this.residentsIDs)
+                    if (this.charactersIDs.length > 0) {
+                        this.fetchCharacters('https://rickandmortyapi.com/api/character/' + this.charactersIDs)
                     }
                 })
                 .catch(err => console.log(err.message))    
         },
-        fetchResidents(url) {
+        fetchCharacters(url) {
             fetch(url)
                 .then(res => res.json())
                 .then(data => {
-                    this.residentsPool = Array.isArray(data) ? [...data] : [data]
+                    this.charactersPool = Array.isArray(data) ? [...data] : [data]
                     })
                 .catch(err => console.log(err.message))
         },
@@ -91,13 +91,13 @@ export default {
     font-size: 1.4rem;
 }
 
-#residents-list {
+#characters-list {
     list-style-type: none;
     font-size: 1.5rem;
     padding: 0px;
 }
 
-.resident-item {
+.character-item {
     display: flex;
     align-content: center;
     background-color: rgb(90, 168, 168);
@@ -106,14 +106,14 @@ export default {
     margin: 5px;
 }
 
-.resident-item img {
+.character-item img {
     border-radius: 50%;
     max-width: 77px;
     height: 15%;
     justify-self: left;
 }
 
-.resident-item p {
+.character-item p {
     text-align: center;
     margin: auto;
     padding: 0px 5px;
