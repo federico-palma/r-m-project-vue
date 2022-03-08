@@ -5,7 +5,7 @@ import CharacterDetailsView from '../views/CharacterDetailsView.vue'
 import LocationsView from '../views/LocationsView.vue'
 import LocationDetailsView from '../views/LocationDetailsView.vue'
 import EpisodesView from '../views/EpisodesView.vue'
-import EpisodeDetailsView from '../views/EpisodesView.vue'
+import EpisodeDetailsView from '../views/EpisodeDetailsView.vue'
 
 const routes = [
   {
