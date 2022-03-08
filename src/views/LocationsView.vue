@@ -35,12 +35,9 @@ export default {
                 .catch(err => console.log(err.message))    
         },
         getNextPage() {
-            let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
-                // console.log(document.documentElement.offsetHeight, document.documentElement.scrollTop + window.innerHeight)
+            let bottomOfWindow = Math.round(document.documentElement.scrollTop) + window.innerHeight === document.documentElement.offsetHeight;
             if (bottomOfWindow) {
-                this.fetchData(this.locationsData.info.next)
-                console.log(this.locationsData.info.next)
-                
+                this.fetchData(this.locationsData.info.next)                
             }
         },
     },
