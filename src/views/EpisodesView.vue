@@ -1,156 +1,170 @@
 <template>
   <section id="episodes">
-            <div v-if="episodesData" id="episode-cards">
-                <div v-for="singleEpisode in episodesPool" class="episode-card" :key="singleEpisode.id" :style="setBackgroundColor(singleEpisode.episode)">
-                    <p class="episode-id">{{ singleEpisode.id }}</p>
-                    <h2 class="episode-name">{{ singleEpisode.name }}</h2>
-                    <p class="episode-number">Season: {{ singleEpisode.episode.slice(1, 3) }} | Episode: {{ singleEpisode.episode.slice(4) }}</p>
-                    <p class="episode-date">{{ singleEpisode.air_date }}</p>
-                    <router-link tag="button" className="characters-btn" :to="{ name:'episode-details', params: {id: singleEpisode.id} }">Characters</router-link>
-                </div>
-            </div>
+    <div v-if="episodesData" id="episode-cards">
+      <div
+        v-for="singleEpisode in episodesPool"
+        class="episode-card"
+        :key="singleEpisode.id"
+        :style="setBackgroundColor(singleEpisode.episode)">
+        <p class="episode-id">{{ singleEpisode.id }}</p>
+        <h2 class="episode-name">{{ singleEpisode.name }}</h2>
+        <p class="episode-number">
+          Season: {{ singleEpisode.episode.slice(1, 3) }} | Episode:
+          {{ singleEpisode.episode.slice(4) }}
+        </p>
+        <p class="episode-date">{{ singleEpisode.air_date }}</p>
+        <router-link
+          tag="button"
+          className="characters-btn"
+          :to="{ name: 'episode-details', params: { id: singleEpisode.id } }"
+          >Characters</router-link
+        >
+      </div>
+    </div>
 
-            <!-- { loading && hasMore && <MainLoading/>} -->
-        </section>
+    <!-- { loading && hasMore && <MainLoading/>} -->
+  </section>
 </template>
 
 <script>
 export default {
-    data() {
-        return {
-            episodesData: null,
-            episodesPool: []
-        }
+  data() {
+    return {
+      episodesData: null,
+      episodesPool: [],
+    };
+  },
+  methods: {
+    fetchData(url) {
+      fetch(url)
+        .then(res => res.json())
+        .then(data => {
+          this.episodesData = data;
+          this.episodesPool = [...this.episodesPool, ...data.results];
+        })
+        .catch(err => console.log(err.message));
     },
-    methods: {
-        fetchData(url) {
-            fetch(url)
-                .then(res => res.json())
-                .then(data => {
-                    this.episodesData = data
-                    this.episodesPool = [...this.episodesPool, ...data.results]
-                    })
-                .catch(err => console.log(err.message))    
-        },
-        getNextPage() {
-            let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
-            if (bottomOfWindow && this.episodesData.info.next != null) {
-                this.fetchData(this.episodesData.info.next)
-            }
-        },
-        setBackgroundColor(season) {
-            switch (season.slice(0, 3)) {
-                case 'S01':
-                    return {backgroundColor: '#7a78dd'}
-                    break;
-                case 'S02':
-                    return {backgroundColor: '#d35868'}
-                    break;
-                case 'S03':
-                    return {backgroundColor: '#e98c46'}
-                    break;
-                case 'S04':
-                    return {backgroundColor: '#85c870'}
-                    break;
-                case 'S05':
-                    return {backgroundColor: '#eb63df'}
-                    break;
-                case 'S06':
-                    return {backgroundColor: '#eeec7f'}
-                    break;
-                case 'S07':
-                    return {backgroundColor: '#82e4cf'}
-                    break;
-                default:
-                    return ''
-                    break;
-            }
-        }   
+    getNextPage() {
+      let bottomOfWindow =
+        document.documentElement.scrollTop + window.innerHeight ===
+        document.documentElement.offsetHeight;
+      if (bottomOfWindow && this.episodesData.info.next != null) {
+        this.fetchData(this.episodesData.info.next);
+      }
     },
-    created () {
-            document.title = "Episodes | R&M Vue Project";
+    setBackgroundColor(season) {
+      switch (season.slice(0, 3)) {
+        case "S01":
+          return { backgroundColor: "#7a78dd" };
+          break;
+        case "S02":
+          return { backgroundColor: "#d35868" };
+          break;
+        case "S03":
+          return { backgroundColor: "#e98c46" };
+          break;
+        case "S04":
+          return { backgroundColor: "#85c870" };
+          break;
+        case "S05":
+          return { backgroundColor: "#eb63df" };
+          break;
+        case "S06":
+          return { backgroundColor: "#eeec7f" };
+          break;
+        case "S07":
+          return { backgroundColor: "#82e4cf" };
+          break;
+        default:
+          return "";
+          break;
+      }
     },
-    beforeMount() {
-        this.fetchData('https://rickandmortyapi.com/api/episode')
-    },
-    updated() {
-        window.addEventListener('scroll', this.getNextPage)
-    },
-    beforeUnmount() {
-        window.removeEventListener('scroll', this.getNextPage)
-    }
-}
+  },
+  created() {
+    document.title = "Episodes | R&M Vue Project";
+  },
+  beforeMount() {
+    this.fetchData("https://rickandmortyapi.com/api/episode");
+  },
+  updated() {
+    window.addEventListener("scroll", this.getNextPage);
+  },
+  beforeUnmount() {
+    window.removeEventListener("scroll", this.getNextPage);
+  },
+};
 </script>
 
 <style>
 #episodes {
-    margin: auto;
-    font-family: 'Righteous', cursive;
+  margin: auto;
+  font-family: "Righteous", cursive;
 }
 
 #episode-cards {
-    width: 100%;
-    height: 100%;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
-    flex-wrap: wrap;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
 }
 
-.episode-card{
-    position: relative;
-    width: max(70%, 380px);
-    height: 300px;
-    margin: 25px;
-    padding: 5px;
-    border-radius: 5px;
-    box-shadow: 2px 2px 5px 1px;
-    background-color: #BEE5fD;
-    display: grid;
-    grid-template-rows: 40% 20% 20% 20%;
+.episode-card {
+  position: relative;
+  width: max(70%, 380px);
+  height: 300px;
+  margin: 25px;
+  padding: 5px;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px 1px;
+  background-color: #bee5fd;
+  display: grid;
+  grid-template-rows: 40% 20% 20% 20%;
 }
 
-.episode-name{
-    margin: auto;
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0);
-    font-size: 2rem;
+.episode-name {
+  margin: auto;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0);
+  font-size: 2rem;
 }
 
 .episode-id {
-    position: absolute;
-    right: 10px;
-    top: -10px;
-    background-color: rgba(19, 0, 0, 0);
-    width: 20px;
-    text-align: end;
+  position: absolute;
+  right: 10px;
+  top: -10px;
+  background-color: rgba(19, 0, 0, 0);
+  width: 20px;
+  text-align: end;
 }
 
 .episode-number {
-    margin: auto;
-    font-size: 1.4rem;
+  margin: auto;
+  font-size: 1.4rem;
 }
 
 .episode-date {
-    margin: auto;
-    font-size: 1.4rem;
+  margin: auto;
+  font-size: 1.4rem;
 }
 
 .characters-btn {
-    margin: auto;
-    width: 50%;
-    min-width: fit-content;
-    background-color: rgba(0, 0, 0, 0);
-    border: 3px solid black;
-    border-radius: 8px;
-    font-size: 1.3rem;
-    font-family: 'Righteous', cursive;
-    text-align: center;
+  margin: auto;
+  width: 50%;
+  min-width: fit-content;
+  background-color: rgba(0, 0, 0, 0);
+  border: 3px solid black;
+  border-radius: 8px;
+  font-size: 1.3rem;
+  font-family: "Righteous", cursive;
+  text-align: center;
 }
 
 .episode-char-btn:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 </style>
