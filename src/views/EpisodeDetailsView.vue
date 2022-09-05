@@ -62,6 +62,9 @@ export default {
   beforeMount() {
     this.fetchData("https://rickandmortyapi.com/api/episode/" + this.id);
   },
+  created() {
+    document.title = "R&M Vue App | Episodes";
+  },
 };
 </script>
 

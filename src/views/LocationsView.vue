@@ -48,7 +48,7 @@ export default {
     },
   },
   created() {
-    document.title = "Locations | R&M Vue Project";
+    document.title = "R&M Vue App | Locations";
   },
   beforeMount() {
     this.fetchData("https://rickandmortyapi.com/api/location");

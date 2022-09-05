@@ -30,7 +30,7 @@ export default {
     titleTemplate: null,
   },
   created() {
-    document.title = "Home | R&M Vue Project";
+    document.title = "R&M Vue App";
   },
 };
 </script>

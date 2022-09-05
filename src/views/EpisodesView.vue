@@ -82,7 +82,7 @@ export default {
     },
   },
   created() {
-    document.title = "Episodes | R&M Vue Project";
+    document.title = "R&M Vue App | Episodes";
   },
   beforeMount() {
     this.fetchData("https://rickandmortyapi.com/api/episode");

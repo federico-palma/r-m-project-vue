@@ -42,6 +42,9 @@ export default {
   beforeMount() {
     this.fetchData("https://rickandmortyapi.com/api/character/" + this.id);
   },
+  created() {
+    document.title = "R&M Vue App | Characters";
+  },
 };
 </script>
 
